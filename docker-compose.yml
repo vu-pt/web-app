@@ -1,0 +1,38 @@
+version: "3"
+
+volumes:
+  dbdata:
+
+services:
+  database:
+    image: mariadb
+    container_name: test_db
+    ports:
+        - 33061:3306
+    environment:
+        MYSQL_ROOT_PASSWORD: root
+    restart: always
+    volumes:
+        - ./docker/db/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+        - dbdata:/var/lib/mysql
+  backend:
+    container_name: test_backend
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    env_file: ./docker/backend/db.env
+    restart: always
+    ports:
+      - "9966:8089"
+    depends_on:
+      - database
+  frontend:
+    container_name: test_frontend
+    build: 
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

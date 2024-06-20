@@ -1,0 +1,8 @@
+<div class="sidebar my-3">
+    <div class="list-group list-group-flush">
+        <a *ngFor="let item of featureItem" class="list-group-item list-group-item-action list-group-item-light p-2"
+        [ngClass]="{'item-active': item.active}"
+        [routerLink]="[item.routerLink]" (click)="onActive(item.label)"
+        >{{item.label}}</a>
+    </div>
+</div>

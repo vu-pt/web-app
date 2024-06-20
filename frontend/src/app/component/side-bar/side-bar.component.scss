@@ -1,0 +1,29 @@
+.sidebar {
+    min-width: 180px;
+
+    .list-group {
+        .list-group-item {
+            height: 40px;
+            line-height: 24px;
+
+            &.item-active {
+                background-color: var(--bs-primary-bg-subtle);
+                border: none;
+                font-weight: 600;
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    right: -16px;
+                    top: 0;
+                    width: 16px;
+                    height: 0;
+                    border-top: 20px solid transparent;
+                    border-bottom: 20px solid transparent;
+                    border-left: 16px solid var(--bs-primary-bg-subtle);
+                    clear: both;
+                }
+            }
+        }
+    }
+}
