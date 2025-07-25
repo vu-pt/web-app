@@ -10,7 +10,7 @@ spring:
         name: backend
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://test_db/test_db?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false
+        url: jdbc:mysql://localhost:33061/test_db?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false
         username: test
         password: test
     jpa:

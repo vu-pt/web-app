@@ -1,10 +1,8 @@
 package net.vuphan.backend.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,19 +12,14 @@ import net.vuphan.backend.service.UserService;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/admin/user")
+@RequestMapping("/api/public")
 @AllArgsConstructor
-public class UserController {
-
+public class PublicController {
+    
     private final UserService userService;
-
-    @GetMapping("/{id}")
-    public UserDto getUser(@PathVariable Long id) {
-        return userService.getUser(id);
-    }
-
-    @GetMapping("/list")
-    public List<UserDto> getUsers() {
-        return userService.getUsers();
+    
+    @PostMapping("/register")
+    public UserDto register(@RequestBody UserDto user) {
+        return userService.createUser(user);
     }
 }

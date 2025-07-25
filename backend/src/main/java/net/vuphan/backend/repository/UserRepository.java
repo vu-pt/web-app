@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import net.vuphan.backend.datamodel.entity.UserEntity;
 
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, Integer>, JpaSpecificationExecutor<UserEntity> {
+public interface UserRepository extends JpaRepository<UserEntity, Long>, JpaSpecificationExecutor<UserEntity> {
+    UserEntity findByUsername(String username);
 }

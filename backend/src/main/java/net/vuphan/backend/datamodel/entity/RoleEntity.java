@@ -1,7 +1,6 @@
 package net.vuphan.backend.datamodel.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -16,22 +15,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "twat_user")
-public class UserEntity extends BaseEntity {
+@Table(name = "twat_role")
+public class RoleEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String name;
 
-    private String password;
-
-    private String fullname;
-
-    private Date lastLogin;
-
-    private String email;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "role")
     private List<UserRoleEntity> userRoles = new ArrayList<>();
 }

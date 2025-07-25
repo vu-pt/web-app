@@ -12,10 +12,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class UserDto {
+    private Long id;
     private String username;
     private String fullname;
     @JsonIgnore
     private String password;
+    private String newPassword;
     private Date lastLogin;
     private boolean status;
+    private String email;
 }
