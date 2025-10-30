@@ -9,7 +9,11 @@ import net.vuphan.backend.datamodel.dto.UserDto;
 public interface UserService extends UserDetailsService {
     List<UserDto> getUsers();
 
-    UserDto getUser(Long id);
+    UserDto createUser(UserDto userDto);
 
-    UserDto createUser(UserDto user);
+    UserDto getUserById(Long id);
+
+    UserDto updateUserById(Long id,UserDto userDto);
+    
+    void deleteById(Long id);
 }

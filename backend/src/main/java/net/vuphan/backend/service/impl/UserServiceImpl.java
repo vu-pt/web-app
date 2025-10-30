@@ -28,6 +28,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getUserById(Long id){
+        UserEntity userEntity= userRepository.findById(id).orElse(null);
+        return userMapper.toDto(userEntity);
+    } 
+
+    @Override
+    public UserDto createUser(UserDto userDto) {
+        UserEntity userEntity = userMapper.toEntity(userDto);
+        userEntity.setPassword(new BCryptPasswordEncoder().encode(userDto.getNewPassword()));
+        UserEntity result = userRepository.save(userEntity);
+        return userMapper.toDto(result);
+    }
+
+    @Override
+    public UserDto updateUserById(Long id,UserDto userUpdate){
+        UserEntity userEntity=userRepository.findById(id).map(user->{
+            user.setUsername(userUpdate.getUsername());
+            return userRepository.save(user);
+        }).orElseThrow(()->new RuntimeException("User not found with"+ id));
+        return userMapper.toDto(userEntity);
+    }
+
+    @Override
+    public void deleteById(Long id){
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUsername(username);
         if (userEntity == null) {
@@ -36,17 +64,5 @@ public class UserServiceImpl implements UserService {
         return userMapper.toUserDetail(userEntity);
     }
 
-    @Override
-    public UserDto getUser(Long id) {
-        return userMapper.toDto(userRepository.findById(id).orElse(null));
-    }
-
-    @Override
-    public UserDto createUser(UserDto user) {
-        UserEntity userEntity = userMapper.toEntity(user);
-        userEntity.setPassword(new BCryptPasswordEncoder().encode(user.getNewPassword()));
-        UserEntity result = userRepository.save(userEntity);
-        return userMapper.toDto(result);
-    }
     
 }
