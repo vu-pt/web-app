@@ -4,7 +4,9 @@ WORKDIR $APP_HOME
 COPY backend .
 RUN gradle clean build
 
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
+# FROM openjdk:17-slim-buster
+# FROM openjdk:17-jdk-slim
 ENV ARTIFACT_NAME=backend-0.0.1-SNAPSHOT.jar
 ENV APP_HOME=/usr/app
 

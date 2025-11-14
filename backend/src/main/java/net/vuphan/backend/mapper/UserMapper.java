@@ -12,7 +12,9 @@ import net.vuphan.backend.datamodel.entity.UserEntity;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(target = "authorities", expression = "java(entity.getUserRoles().stream().map(t -> t.getRole().getName()).collect(java.util.stream.Collectors.joining(\"::\")))")
+    @Mapping(
+        target = "authorities", 
+        expression = "java(entity.getUserRoles().stream().map(t -> t.getRole().getName()).collect(java.util.stream.Collectors.joining(\"::\")))")
     UserDetailsDto toUserDetail(UserEntity entity);
 
     

@@ -1,6 +1,10 @@
 package net.vuphan.backend.controller;
 
+import java.util.List;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,4 +31,13 @@ public class PublicController {
     public UserDto register(@RequestBody UserDto user) {
         return userService.createUser(user);
     }
+
+    @GetMapping("/api/myroles")
+    public List<String> getMyRoles(Authentication authentication) {
+        return authentication.getAuthorities()
+                .stream()
+                .map(a -> a.getAuthority())
+                .toList();
+    }
+
 }
